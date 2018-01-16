@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     public TextView textView;
-    public String string1 = "Olá Fulano";
+    public String string1 = "Teste APP1";
     public String string2 = "Ola, tudo bem?";
 
     @Override
