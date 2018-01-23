@@ -1,5 +1,9 @@
 package com.luna.classificados.model;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+import com.luna.classificados.helper.FirebaseBanco;
+
 public class Usuario {
 
     private String id;
@@ -11,6 +15,7 @@ public class Usuario {
 
     }
 
+    @Exclude
     public String getId() {
         return id;
     }
@@ -35,6 +40,7 @@ public class Usuario {
         this.idCondominio = idCondominio;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }
@@ -42,4 +48,12 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public void salvar(){
+
+        DatabaseReference reference = FirebaseBanco.getFirebaseBanco();
+        reference.child("usuarios").child(getId()).setValue(this);
+
+    }
+
 }

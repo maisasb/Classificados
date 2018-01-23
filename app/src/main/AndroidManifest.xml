@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.CadastroUsuarioActivity"/>
+        <activity android:name=".activity.CondominioActivity"/>
     </application>
 
 </manifest>

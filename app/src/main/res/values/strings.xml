@@ -15,5 +15,10 @@
     <string name="add_error_mailalready">E-mail já cadastrado.</string>
     <string name="add_error">Erro ao cadastrar usuário.</string>
     <string name="add_error_confirmPass">*Senhas não conferem</string>
-    <string name="add_condominium">Condomínio</string>
+    <string name="add_weakpass">Senha fraca</string>
+
+    <!-- Tela escolha condominio -->
+    <string name="condominium">Escolha o condomínio que você mora</string>
+    <string name="add_condominium">Seu condomínio não está na lista? Cadastre aqui</string>
+    <string name="botao_continuar">Continuar</string>
 </resources>

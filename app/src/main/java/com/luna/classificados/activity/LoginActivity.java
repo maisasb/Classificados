@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
                 startActivity ( intent );
+                finish();
 
             }
         });

@@ -1,5 +1,6 @@
 package com.luna.classificados.activity;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,8 +18,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
 import com.luna.classificados.R;
 import com.luna.classificados.helper.FirebaseAutenticacao;
+import com.luna.classificados.helper.Preferencias;
 import com.luna.classificados.model.Usuario;
 
 
@@ -30,6 +33,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
     public EditText confirmarSenhaText;
     public TextView textErrorConfirmPass;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
         senhaText = findViewById(R.id.senhaText);
         confirmarSenhaText = findViewById(R.id.confirmarSenhaText);
         textErrorConfirmPass = findViewById(R.id.textErrorConfirmPass);
+
 
         buttonCadastrar = findViewById(R.id.buttonCadastrar);
 
@@ -73,6 +78,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
             }
         });
 
+
+
     }
 
     private boolean verifyPassword() {
@@ -105,9 +112,14 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
 
                         if(task.isSuccessful()){
                             Toast.makeText(CadastroUsuarioActivity.this, R.string.add_success,  Toast.LENGTH_SHORT).show();
-                            //TODO salvar usuário no banco
-                            //TODO go to notification page
-                            finish();
+
+                            FirebaseUser user = task.getResult().getUser();
+
+                            salvaUsuario(user);
+
+                            inserirUsuarioArquivoPreferencias(user.getUid());
+
+                            selecionaCondominioActivity();
 
                         }else{
 
@@ -116,7 +128,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
                                     throw task.getException();
                                 }
                             }catch(FirebaseAuthWeakPasswordException e){
-                                Toast.makeText(CadastroUsuarioActivity.this, R.string.add_success,  Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CadastroUsuarioActivity.this, R.string.add_weakpass,  Toast.LENGTH_SHORT).show();
                             }catch(FirebaseAuthInvalidCredentialsException e){
                                 Toast.makeText(CadastroUsuarioActivity.this, R.string.add_error_invalidmail,  Toast.LENGTH_SHORT).show();
                             }catch(FirebaseAuthUserCollisionException e){
@@ -130,6 +142,34 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
 
                     }
                 });
+
+    }
+
+    private void inserirUsuarioArquivoPreferencias(String uuid) {
+
+        Preferencias preferencias = new Preferencias(CadastroUsuarioActivity.this);
+        preferencias.salvarDados( uuid );
+
+    }
+
+    private void selecionaCondominioActivity() {
+
+        Intent intent = new Intent(CadastroUsuarioActivity.this, CondominioActivity.class);
+        startActivity ( intent );
+
+        finish();
+
+    }
+
+    private void salvaUsuario(FirebaseUser user) {
+
+        Usuario usuario = new Usuario();
+        usuario.setId(user.getUid());
+        usuario.setEmail(user.getEmail());
+
+        usuario.salvar();
+
+
 
     }
 
