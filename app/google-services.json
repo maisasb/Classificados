@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "932689926024",
+    "firebase_url": "https://classificados-do-condominio.firebaseio.com",
+    "project_id": "classificados-do-condominio",
+    "storage_bucket": "classificados-do-condominio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932689926024:android:fe53efa2499e29ef",
+        "android_client_info": {
+          "package_name": "com.luna.classificados"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932689926024-ekrn81h4lo3b8up47q821go00ud1ljm2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luna.classificados",
+            "certificate_hash": "7fbfd91c013ae44d4c0ac7a162d65c21b4a6da8a"
+          }
+        },
+        {
+          "client_id": "932689926024-h67a772jvj7o57qo4mjjtm0q6u9q3q5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeLriPMKkWDZmR5744TXXMofFP1mPAWi4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932689926024-h67a772jvj7o57qo4mjjtm0q6u9q3q5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
