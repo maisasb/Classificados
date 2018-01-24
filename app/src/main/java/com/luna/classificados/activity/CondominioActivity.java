@@ -1,5 +1,6 @@
 package com.luna.classificados.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -84,6 +85,9 @@ public class CondominioActivity extends AppCompatActivity {
                 DatabaseReference referenciaUsuario = referenciaBanco.child("usuarios").child(idUsuarioLogado);
                 referenciaUsuario.child("condominio").setValue(condominioSelecionado.getId());
 
+                Intent intent = new Intent(CondominioActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

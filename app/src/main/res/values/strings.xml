@@ -21,4 +21,7 @@
     <string name="condominium">Escolha o condomínio que você mora</string>
     <string name="add_condominium">Seu condomínio não está na lista? Cadastre aqui</string>
     <string name="botao_continuar">Continuar</string>
+
+    <!-- Tela Main -->
+    <string name="main_titulo">Anunciaê</string>
 </resources>
