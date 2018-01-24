@@ -2,28 +2,53 @@ package com.luna.classificados.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.luna.classificados.R;
 import com.luna.classificados.helper.FirebaseAutenticacao;
+import com.luna.classificados.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 
     public TextView linkNoAccount;
     public FirebaseAuth autenticacao;
+    public EditText emailText;
+    public EditText senhaText;
+    public Button botaoLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        autenticacao = FirebaseAutenticacao.getFirebaseAutenticacao();
         verificaUsuarioLogado();
 
-        //TODO acao do botao - login
+        emailText = findViewById(R.id.emailText);
+        senhaText = findViewById(R.id.senhaText);
+        botaoLogin = findViewById(R.id.buttonLogin);
+
+        botaoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Usuario usuario = new Usuario();
+                usuario.setEmail(emailText.getText().toString());
+                usuario.setSenha(senhaText.getText().toString());
+                validarLogin(usuario);
+
+            }
+        });
 
         linkNoAccount = findViewById(R.id.linkNoAccount);
         linkNoAccount.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +58,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void validarLogin(Usuario usuario) {
+
+        autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).
+                addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()){
+
+                            abrirTelaAnuncios();
+
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Erro ao fazer login", Toast.LENGTH_SHORT);
+                        }
+
+                    }
+                });
 
     }
 
@@ -49,10 +94,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verificaUsuarioLogado() {
-        autenticacao = FirebaseAutenticacao.getFirebaseAutenticacao();
         if (autenticacao.getCurrentUser() != null) {
             abrirTelaAnuncios();
         }
     }
+
+
 
 }

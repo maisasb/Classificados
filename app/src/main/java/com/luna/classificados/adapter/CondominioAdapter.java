@@ -11,6 +11,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 
+import com.luna.classificados.R;
 import com.luna.classificados.model.Condominio;
 
 
@@ -44,11 +45,11 @@ public class CondominioAdapter extends BaseAdapter implements SpinnerAdapter{
         View spinView;
         if( convertView == null ){
             LayoutInflater inflater = activity.getLayoutInflater();
-            spinView = inflater.inflate(android.R.layout.simple_spinner_item, null);
+            spinView = inflater.inflate(R.layout.item_spinner_condominios, null);
         } else {
             spinView = convertView;
         }
-        TextView t1 = (TextView) spinView.findViewById(android.R.id.text1);
+        TextView t1 = (TextView) spinView.findViewById(R.id.itemId);
         t1.setText(condominios.get(position).getNome());
 
         return spinView;

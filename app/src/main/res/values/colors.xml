@@ -7,4 +7,5 @@
     <color name="backgroundAccent">#14A8CC</color>
     <color name="textPrimary">#FFFFFF</color>
     <color name="error">#ff4b19</color>
+    <color name="fieldsBackground">#f2f2f2</color>
 </resources>
