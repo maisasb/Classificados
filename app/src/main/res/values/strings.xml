@@ -23,5 +23,9 @@
     <string name="botao_continuar">Continuar</string>
 
     <!-- Tela Main -->
-    <string name="main_titulo">Anunciaê</string>
+    <string name="main_titulo">AnunciaÊ</string>
+
+    <!-- Tela Menu -->
+    <string name="menu_item_conf">Configurações</string>
+    <string name="menu_item_Sair">Sair</string>
 </resources>
