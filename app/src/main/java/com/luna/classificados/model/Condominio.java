@@ -1,5 +1,7 @@
 package com.luna.classificados.model;
 
+import com.google.firebase.database.DatabaseReference;
+
 /**
  * Created by Asus on 22/01/2018.
  */
@@ -28,4 +30,10 @@ public class Condominio {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public void salvaUsuario(DatabaseReference referenciaBanco, String idUsuarioLogado){
+        DatabaseReference referenciaCondominio = referenciaBanco.child("condominios").child(getId());
+        referenciaCondominio.child("usuarios").child(idUsuarioLogado).setValue(true);
+    }
+
 }

@@ -17,6 +17,7 @@ import com.luna.classificados.adapter.CondominioAdapter;
 import com.luna.classificados.helper.FirebaseBanco;
 import com.luna.classificados.helper.Preferencias;
 import com.luna.classificados.model.Condominio;
+import com.luna.classificados.model.Usuario;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,19 @@ public class CondominioActivity extends AppCompatActivity {
     public ArrayList<Condominio> condominioLista;
     public CondominioAdapter dataAdapter;
     public Button botaoContinuar;
+    public ValueEventListener valueEventListenerCondominio;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        referenciaBanco.removeEventListener(valueEventListenerCondominio);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        referenciaBanco.addListenerForSingleValueEvent(valueEventListenerCondominio);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +55,7 @@ public class CondominioActivity extends AppCompatActivity {
         referenciaBanco = FirebaseBanco.getFirebaseBanco();
         referenciaBanco.child("condominios");
 
-        referenciaBanco.addListenerForSingleValueEvent(new ValueEventListener() {
+        valueEventListenerCondominio = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -64,7 +78,8 @@ public class CondominioActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };
+
 
         botaoContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,23 +92,37 @@ public class CondominioActivity extends AppCompatActivity {
 
                 referenciaBanco = FirebaseBanco.getFirebaseBanco();
 
-                //Salva usuário no condomínio
-                DatabaseReference referenciaCondominio = referenciaBanco.child("condominios").child(condominioSelecionado.getId());
-                referenciaCondominio.child("usuarios").child(idUsuarioLogado).setValue(true);
+                salvaDadosFirebase(condominioSelecionado, idUsuarioLogado);
 
-                //Salva condominio no usuário
-                DatabaseReference referenciaUsuario = referenciaBanco.child("usuarios").child(idUsuarioLogado);
-                referenciaUsuario.child("condominio").setValue(condominioSelecionado.getId());
+                abrirTelaPrincipal();
 
-                Intent intent = new Intent(CondominioActivity.this,MainActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
 
 
         dataAdapter = new CondominioAdapter(this, condominioLista);
         condominiumSpinner.setAdapter(dataAdapter);
+
+    }
+
+    private void salvaDadosFirebase(Condominio condominioSelecionado, String idUsuarioLogado) {
+
+        //Salva usuário no condomínio
+        condominioSelecionado.salvaUsuario(referenciaBanco, idUsuarioLogado);
+
+        //Salva condominio no usuário
+        Usuario usuario = new Usuario();
+        usuario.setId(idUsuarioLogado);
+        usuario.setIdCondominio(condominioSelecionado.getId());
+        usuario.salvaCondominio(referenciaBanco);
+
+    }
+
+    private void abrirTelaPrincipal(){
+
+        Intent intent = new Intent(CondominioActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 

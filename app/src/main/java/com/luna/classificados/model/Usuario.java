@@ -56,4 +56,11 @@ public class Usuario {
 
     }
 
+    public void salvaCondominio(DatabaseReference referenciaBanco){
+
+        DatabaseReference referenciaUsuario = referenciaBanco.child("usuarios").child(getId());
+        referenciaUsuario.child("condominio").setValue(getIdCondominio());
+
+    }
+
 }
