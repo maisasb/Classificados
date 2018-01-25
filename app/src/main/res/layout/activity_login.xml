@@ -58,9 +58,9 @@
         android:layout_below="@+id/senhaText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
-        android:background="@color/colorPrimaryDark"
         android:text="@string/buttonLogin"
-        android:textColor="@color/textPrimary" />
+        android:background="@drawable/botao"
+        android:theme="@style/buttonTheme"/>
 
     <TextView
         android:id="@+id/linkNoAccount"
