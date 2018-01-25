@@ -7,6 +7,10 @@
     <string name="login_pass">Senha</string>
     <string name="buttonLogin">Entrar</string>
     <string name="buttonAdd">Cadastrar</string>
+    <string name="login_error">Erro ao fazer login.</string>
+    <string name="login_error_pass">Senha inválida.</string>
+    <string name="login_error_email">Email inválido.</string>
+    <string name="login_complete_fields">Preencha todos os campos.</string>
 
     <!-- Tela cadastro -->
     <string name="add_confirmPass">Confirmar senha</string>
