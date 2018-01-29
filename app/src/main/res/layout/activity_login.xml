@@ -47,9 +47,9 @@
         android:layout_below="@+id/textView2"
         android:layout_marginRight="@dimen/margin_right"
         android:layout_marginTop="10dp"
+        android:backgroundTint="@color/textPrimary"
         android:ems="10"
-        android:inputType="textPassword"
-        android:backgroundTint="@color/textPrimary"/>
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/buttonLogin"

@@ -36,4 +36,9 @@ public class Condominio {
         referenciaCondominio.child("usuarios").child(idUsuarioLogado).setValue(true);
     }
 
+    @Override
+    public String toString() {
+        return getNome();
+    }
+
 }

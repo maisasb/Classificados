@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +28,7 @@ public class CondominioActivity extends AppCompatActivity {
     public Spinner condominiumSpinner;
     public DatabaseReference referenciaBanco;
     public ArrayList<Condominio> condominioLista;
-    public CondominioAdapter dataAdapter;
+    public ArrayAdapter dataAdapter;
     public Button botaoContinuar;
     public ValueEventListener valueEventListenerCondominio;
 
@@ -52,8 +54,7 @@ public class CondominioActivity extends AppCompatActivity {
         condominiumSpinner = findViewById(R.id.condominiumSpinner);
         botaoContinuar =  findViewById(R.id.botaoContinuar);
 
-        referenciaBanco = FirebaseBanco.getFirebaseBanco();
-        referenciaBanco.child("condominios");
+        referenciaBanco = FirebaseBanco.getFirebaseBanco().child("condominios");
 
         valueEventListenerCondominio = new ValueEventListener() {
             @Override
@@ -61,17 +62,12 @@ public class CondominioActivity extends AppCompatActivity {
 
                 for(DataSnapshot condominiosId : dataSnapshot.getChildren()){
 
-                    for (DataSnapshot dados : condominiosId.getChildren()){
-
-                        Condominio condominio = dados.getValue(Condominio.class);
-                        condominio.setId(dados.getKey());
-                        condominioLista.add(condominio);
-                        dataAdapter.notifyDataSetChanged();
-
-                    }
+                    Condominio condominio = condominiosId.getValue(Condominio.class);
+                    condominio.setId(condominiosId.getKey());
+                    condominioLista.add(condominio);
 
                 }
-
+                dataAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -100,7 +96,10 @@ public class CondominioActivity extends AppCompatActivity {
         });
 
 
-        dataAdapter = new CondominioAdapter(this, condominioLista);
+        //dataAdapter = new CondominioAdapter(this, condominioLista);
+        //condominiumSpinner.setAdapter(dataAdapter);
+        dataAdapter = new ArrayAdapter<Condominio>(this, R.layout.item_spinner_condominios, condominioLista);
+        dataAdapter.setDropDownViewResource(R.layout.dropdown_spinner_condominios);
         condominiumSpinner.setAdapter(dataAdapter);
 
     }

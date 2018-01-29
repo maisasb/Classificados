@@ -3,8 +3,8 @@
 
     <!-- Tela login -->
     <string name="login_noaccount">Não tem uma conta? Cadastrar</string>
-    <string name="login_email">E-mail</string>
-    <string name="login_pass">Senha</string>
+    <string name="login_email">E-mail*</string>
+    <string name="login_pass">Senha*</string>
     <string name="buttonLogin">Entrar</string>
     <string name="buttonAdd">Cadastrar</string>
     <string name="login_error">Erro ao fazer login.</string>
@@ -13,7 +13,7 @@
     <string name="login_complete_fields">Preencha todos os campos.</string>
 
     <!-- Tela cadastro -->
-    <string name="add_confirmPass">Confirmar senha</string>
+    <string name="add_confirmPass">Confirmar senha*</string>
     <string name="add_success">Usuário incluído com sucesso.</string>
     <string name="add_error_invalidmail">E-mail inválido.</string>
     <string name="add_error_mailalready">E-mail já cadastrado.</string>
@@ -25,6 +25,7 @@
     <string name="condominium">Escolha o condomínio que você mora</string>
     <string name="add_condominium">Seu condomínio não está na lista? Cadastre aqui</string>
     <string name="botao_continuar">Continuar</string>
+    <string name="select">Selecione</string>
 
     <!-- Menu Configuracao Esquerdo -->
     <string name="menu_item_conf">Configurações</string>

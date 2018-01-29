@@ -51,17 +51,20 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                if (verifyPassword()){
+                if (validaCampos()){
+                    if ( verifyPassword()){
 
-                    Usuario usuario = new Usuario();
-                    usuario.setEmail(emailText.getText().toString());
-                    usuario.setSenha(senhaText.getText().toString());
 
-                    cadastrarUsuario(usuario);
+                        Usuario usuario = new Usuario();
+                        usuario.setEmail(emailText.getText().toString());
+                        usuario.setSenha(senhaText.getText().toString());
 
+                        cadastrarUsuario(usuario);
+
+                    }
+                }else{
+                    Toast.makeText(CadastroUsuarioActivity.this, R.string.login_complete_fields, Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 
@@ -80,6 +83,20 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
 
 
 
+    }
+
+    private boolean validaCampos() {
+
+        if (emailText.getText().length() == 0){
+            return false;
+        }
+        if (senhaText.getText().length() == 0){
+            return false;
+        }
+        if (confirmarSenhaText.getText().length() == 0){
+            return false;
+        }
+        return true;
     }
 
     private boolean verifyPassword() {

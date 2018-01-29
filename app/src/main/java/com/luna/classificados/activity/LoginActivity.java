@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
         }catch(Exception e){
-            Toast.makeText(LoginActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Atualize o Google Play Services do seu celular.", Toast.LENGTH_SHORT).show();
             Log.e("ERRO AO LOGAR", e.getMessage());
         }
 
@@ -129,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
     private void abrirTelaCadastro() {
         Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
         startActivity ( intent );
-        finish();
     }
 
     private void abrirTelaAnuncios() {
