@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Classificados</string>
+    <string name="app_name">AnunciaÊ</string>
 
     <!-- Tela login -->
     <string name="login_noaccount">Não tem uma conta? Cadastrar</string>
@@ -26,10 +26,12 @@
     <string name="add_condominium">Seu condomínio não está na lista? Cadastre aqui</string>
     <string name="botao_continuar">Continuar</string>
 
-    <!-- Tela Main -->
-    <string name="main_titulo">AnunciaÊ</string>
-
-    <!-- Menu -->
+    <!-- Menu Configuracao Esquerdo -->
     <string name="menu_item_conf">Configurações</string>
     <string name="menu_item_Sair">Sair</string>
+
+    <!-- Menu Lateral Direito-->
+    <string name="mail">luna.vaz.barros@gmail.com</string>
+    <string name="navigation_drawer_open">Abrir menu de navegação</string>
+    <string name="navigation_drawer_close">Fechar menu de navegação</string>
 </resources>

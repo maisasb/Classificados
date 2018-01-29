@@ -18,7 +18,6 @@
         android:textSize="@dimen/fontSizeDefault" />
 
 
-
     <Spinner
         android:id="@+id/condominiumSpinner"
         android:layout_width="match_parent"
