@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <!--
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_gallery"
@@ -16,19 +17,37 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
-    </group>
+    </group> -->
 
-    <item android:title="Communicate">
+    <item android:title="@string/empreendedores">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_novo_negocio"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/novo_negocio" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_gerenciar_negocio"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Send" />
+                android:title="@string/gerenciar_negocio" />
+            <item
+                android:id="@+id/nav"
+                android:checkable="false"
+                android:enabled="false"
+                android:orderInCategory="200"
+                android:title="" />
         </menu>
     </item>
 
+    <group android:checkableBehavior="single">
+        <item
+            android:orderInCategory="200"
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_item_Sair" />
+        <item
+            android:orderInCategory="200"
+            android:id="@+id/nav_configuracoes"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_item_conf" />
+    </group>
 </menu>

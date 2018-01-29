@@ -83,33 +83,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        /*         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        } */
-
         switch (item.getItemId()){
-            case R.id.nav_gallery:
+            case R.id.nav_novo_negocio:
                 return true;
-            case R.id.nav_slideshow:
+            case R.id.nav_gerenciar_negocio:
                 return true;
-            case R.id.nav_manage:
+            case R.id.nav_configuracoes:
                 return true;
-            case R.id.nav_share:
+            case R.id.nav_sair:
+                logoutApp();
                 return true;
-            case R.id.nav_send:
-                return true;
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
