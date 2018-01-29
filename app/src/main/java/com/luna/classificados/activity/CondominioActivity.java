@@ -90,6 +90,8 @@ public class CondominioActivity extends AppCompatActivity {
 
                 salvaDadosFirebase(condominioSelecionado, idUsuarioLogado);
 
+                inserirCondominioArquivoPreferencias(condominioSelecionado.getId());
+
                 abrirTelaPrincipal();
 
             }
@@ -112,7 +114,7 @@ public class CondominioActivity extends AppCompatActivity {
         //Salva condominio no usuário
         Usuario usuario = new Usuario();
         usuario.setId(idUsuarioLogado);
-        usuario.setIdCondominio(condominioSelecionado.getId());
+        usuario.setCondominio(condominioSelecionado.getId());
         usuario.salvaCondominio(referenciaBanco);
 
     }
@@ -122,6 +124,13 @@ public class CondominioActivity extends AppCompatActivity {
         Intent intent = new Intent(CondominioActivity.this,MainActivity.class);
         startActivity(intent);
         finish();
+
+    }
+
+    private void inserirCondominioArquivoPreferencias(String cond) {
+
+        Preferencias preferencias = new Preferencias(CondominioActivity.this);
+        preferencias.salvarDadosCondominio(cond);
 
     }
 

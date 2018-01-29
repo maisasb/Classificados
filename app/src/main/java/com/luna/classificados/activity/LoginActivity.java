@@ -17,8 +17,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.luna.classificados.R;
 import com.luna.classificados.helper.FirebaseAutenticacao;
+import com.luna.classificados.helper.FirebaseBanco;
+import com.luna.classificados.helper.Preferencias;
+import com.luna.classificados.model.Condominio;
 import com.luna.classificados.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,6 +35,16 @@ public class LoginActivity extends AppCompatActivity {
     public EditText emailText;
     public EditText senhaText;
     public Button botaoLogin;
+    public ValueEventListener valueEventListenerUsuario;
+    public DatabaseReference referenciaBanco;
+    Preferencias preferencias;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (referenciaBanco !=null)
+            referenciaBanco.removeEventListener(valueEventListenerUsuario);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         autenticacao = FirebaseAutenticacao.getFirebaseAutenticacao();
+        preferencias = new Preferencias(LoginActivity.this);
+
         verificaUsuarioLogado();
 
         emailText = findViewById(R.id.emailText);
@@ -95,7 +114,31 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (task.isSuccessful()){
 
-                                abrirTelaAnuncios();
+                                inserirUsuarioArquivoPreferencias(autenticacao.getCurrentUser().getUid());
+
+                                //Listener para verificar se o usuário já possui condomínio
+                                valueEventListenerUsuario = new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                        Usuario usuario = dataSnapshot.getValue(Usuario.class);
+
+                                        if (usuario.getCondominio() == null){
+                                            abrirTelaCondominio();
+                                        }else{
+                                            inserirCondominioArquivoPreferencias(usuario.getCondominio());
+                                            abrirTelaAnuncios();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                };
+                                referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(autenticacao.getCurrentUser().getUid());
+                                referenciaBanco.addListenerForSingleValueEvent(valueEventListenerUsuario);
 
                             }else{
 
@@ -129,6 +172,13 @@ public class LoginActivity extends AppCompatActivity {
     private void abrirTelaCadastro() {
         Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
         startActivity ( intent );
+
+    }
+
+    private void abrirTelaCondominio() {
+        Intent intent = new Intent(LoginActivity.this, CondominioActivity.class);
+        startActivity ( intent );
+        finish();
     }
 
     private void abrirTelaAnuncios() {
@@ -138,10 +188,30 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verificaUsuarioLogado() {
+
         if (autenticacao.getCurrentUser() != null) {
-            abrirTelaAnuncios();
+
+            if(preferencias.getCondominio() != null && preferencias.getCondominio() != ""){
+                abrirTelaAnuncios();
+            }else{
+                abrirTelaCondominio();
+            }
+
         }
     }
+
+    private void inserirUsuarioArquivoPreferencias(String uuid) {
+
+        preferencias.salvarDadosUsuario( uuid );
+
+    }
+
+    private void inserirCondominioArquivoPreferencias(String id) {
+
+        preferencias.salvarDadosUsuario( id );
+
+    }
+
 
 
 }
