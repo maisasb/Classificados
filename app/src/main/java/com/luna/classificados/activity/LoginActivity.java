@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     public Button botaoLogin;
     public ValueEventListener valueEventListenerUsuario;
     public DatabaseReference referenciaBanco;
-    Preferencias preferencias;
+    public Preferencias preferencias;
 
     @Override
     protected void onStop() {
@@ -114,7 +114,9 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (task.isSuccessful()){
 
-                                inserirUsuarioArquivoPreferencias(autenticacao.getCurrentUser().getUid());
+                                if (autenticacao.getCurrentUser() != null){
+                                    inserirUsuarioArquivoPreferencias(autenticacao.getCurrentUser().getUid());
+                                }
 
                                 //Listener para verificar se o usuário já possui condomínio
                                 valueEventListenerUsuario = new ValueEventListener() {
@@ -123,11 +125,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                         Usuario usuario = dataSnapshot.getValue(Usuario.class);
 
-                                        if (usuario.getCondominio() == null){
-                                            abrirTelaCondominio();
-                                        }else{
-                                            inserirCondominioArquivoPreferencias(usuario.getCondominio());
-                                            abrirTelaAnuncios();
+                                        if (usuario != null){
+                                            if (usuario.getCondominio() == null){
+                                                abrirTelaCondominio();
+                                            }else{
+                                                inserirCondominioArquivoPreferencias(usuario.getCondominio());
+                                                abrirTelaAnuncios();
+                                            }
                                         }
 
                                     }
@@ -191,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (autenticacao.getCurrentUser() != null) {
 
-            if(preferencias.getCondominio() != null && preferencias.getCondominio() != ""){
+            if(preferencias.getCondominio() != null && !preferencias.getCondominio().equals("")){
                 abrirTelaAnuncios();
             }else{
                 abrirTelaCondominio();

@@ -9,13 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.luna.classificados.R;
-import com.luna.classificados.adapter.CondominioAdapter;
 import com.luna.classificados.helper.FirebaseBanco;
 import com.luna.classificados.helper.Preferencias;
 import com.luna.classificados.model.Condominio;
@@ -63,8 +61,10 @@ public class CondominioActivity extends AppCompatActivity {
                 for(DataSnapshot condominiosId : dataSnapshot.getChildren()){
 
                     Condominio condominio = condominiosId.getValue(Condominio.class);
-                    condominio.setId(condominiosId.getKey());
-                    condominioLista.add(condominio);
+                    if (condominio != null){
+                        condominio.setId(condominiosId.getKey());
+                        condominioLista.add(condominio);
+                    }
 
                 }
                 dataAdapter.notifyDataSetChanged();
@@ -97,10 +97,7 @@ public class CondominioActivity extends AppCompatActivity {
             }
         });
 
-
-        //dataAdapter = new CondominioAdapter(this, condominioLista);
-        //condominiumSpinner.setAdapter(dataAdapter);
-        dataAdapter = new ArrayAdapter<Condominio>(this, R.layout.item_spinner_condominios, condominioLista);
+        dataAdapter = new ArrayAdapter(this, R.layout.item_spinner_condominios, condominioLista);
         dataAdapter.setDropDownViewResource(R.layout.dropdown_spinner_condominios);
         condominiumSpinner.setAdapter(dataAdapter);
 
