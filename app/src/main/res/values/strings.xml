@@ -40,4 +40,10 @@
     <string name="novo_negocio">Cadastrar novo negócio</string>
     <string name="gerenciar_negocio">Gerenciar negócio</string>
 
+    <!-- Fragmentos -->
+    <string name="frag_anuncios">Anúncios</string>
+    <string name="frag_negocios">Negócios</string>
+    <string name="titulo_tab_anuncios">"ANÚNCIOS"</string>
+    <string name="titulo_tab_negocios">"NEGÓCIOS"</string>
+
 </resources>

@@ -2,7 +2,9 @@ package com.luna.classificados.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.support.design.widget.NavigationView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.luna.classificados.R;
+import com.luna.classificados.adapter.TabAdapter;
 import com.luna.classificados.helper.FirebaseAutenticacao;
 
 
@@ -22,6 +25,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
+
+    private TabLayout slidingTabLayout;
+    private ViewPager viewPager;
 
 
     @Override
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
+        // Menu lateral esquerdo
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -41,6 +48,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Sliding Tabs
+        slidingTabLayout = (TabLayout) findViewById(R.id.stl_tabs);
+        viewPager = (ViewPager) findViewById(R.id.vp_pagina);
+
+        //Configurar adapter
+        TabAdapter tabAdapter = new TabAdapter( getSupportFragmentManager() );
+        viewPager.setAdapter( tabAdapter );
+
+        slidingTabLayout.setupWithViewPager( viewPager );
+
 
     }
 
