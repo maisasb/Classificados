@@ -3,21 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <!--
+
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_anuncios"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Gallery" />
+            android:title="@string/anuncios" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_negocios"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group> -->
+            android:title="@string/negocios" />
+    </group>
 
     <item android:title="@string/empreendedores">
         <menu>

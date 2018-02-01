@@ -35,10 +35,21 @@
     <string name="mail">luna.vaz.barros@gmail.com</string>
     <string name="navigation_drawer_open">Abrir menu de navegação</string>
     <string name="navigation_drawer_close">Fechar menu de navegação</string>
-
+    <string name="anuncios">Anúncios do dia</string>
+    <string name="negocios">Lista de negócios</string>
     <string name="empreendedores">EMPREENDEDORES</string>
     <string name="novo_negocio">Cadastrar novo negócio</string>
     <string name="gerenciar_negocio">Gerenciar negócio</string>
+
+    <!-- Tela cadastro de negócio -->
+    <string name="cad_titulo">Cadastro de negócio</string>
+    <string name="cad_nome">Nome*</string>
+    <string name="cad_breve_desc">Breve descrição*</string>
+    <string name="cad_desc">Descrição completa*</string>
+    <string name="cad_categoria">Categoria*</string>
+    <string name="cad_contato">Contato*</string>
+    <string name="cad_aberto">Aberto</string>
+    <string name="cad_cadastrar">Cadastrar</string>
 
     <!-- Fragmentos -->
     <string name="frag_anuncios">Anúncios</string>

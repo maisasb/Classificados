@@ -133,6 +133,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
                             FirebaseUser user = task.getResult().getUser();
 
                             salvaUsuario(user);
+                            
+                            enviaEmail();
 
                             inserirUsuarioArquivoPreferencias(user.getUid());
 
@@ -160,6 +162,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
                     }
                 });
 
+    }
+
+    private void enviaEmail() {
     }
 
     private void inserirUsuarioArquivoPreferencias(String uuid) {

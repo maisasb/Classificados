@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            android:padding="20dp"
+            android:text="@string/cad_titulo"
+            android:textColor="@color/textPrimary" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView5"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/cad_nome" />
+
+        <EditText
+            android:id="@+id/cadNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView7"
+            android:layout_below="@+id/textView7"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cadNome"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/cad_breve_desc" />
+
+        <EditText
+            android:id="@+id/cadBreveDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView8"
+            android:layout_below="@+id/textView8"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginTop="20dp"
+            android:ems="10" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cadBreveDesc"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/cad_desc" />
+
+        <EditText
+            android:id="@+id/cadDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView9"
+            android:layout_below="@+id/textView9"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textMultiLine"/>
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cadDescricao"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/cad_categoria" />
+        <Spinner
+            android:id="@+id/cadSpinnerCategoria"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView10"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin_right"
+            android:layout_marginTop="20dp"
+            android:drawSelectorOnTop="true"
+            android:textColor="@color/textPrimary" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cadSpinnerCategoria"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/cad_contato" />
+
+        <EditText
+            android:id="@+id/cadContato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView11"
+            android:layout_alignBottom="@+id/textView11"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cadContato"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/cad_aberto" />
+
+        <Switch
+            android:id="@+id/cadSwitchAberto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView12"
+            android:layout_alignBottom="@+id/textView12"
+            android:layout_toEndOf="@+id/textView11"
+            android:text="Switch" />
+
+        <Button
+            android:id="@+id/botaoCadastrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cadSwitchAberto"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="34dp"
+            android:text="@string/cad_cadastrar"
+            android:background="@drawable/botao"
+            android:theme="@style/buttonTheme"/>
+
+
+    </RelativeLayout>
+
+</ScrollView>
