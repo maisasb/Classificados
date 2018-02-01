@@ -2,12 +2,10 @@ package com.luna.classificados.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +18,6 @@ import android.support.design.widget.NavigationView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.luna.classificados.R;
-import com.luna.classificados.adapter.TabAdapter;
 import com.luna.classificados.fragment.CadastroNegocioFragment;
 import com.luna.classificados.fragment.MainFragment;
 import com.luna.classificados.helper.FirebaseAutenticacao;
@@ -108,7 +105,7 @@ public class MainActivity extends AppCompatActivity
                 return true;
             case R.id.nav_novo_negocio:
                 Fragment fragment = new CadastroNegocioFragment();
-                abreFragmento(fragment, TagFragmentEnum.NEGOCIO.toString(), null);
+                abreFragmento(fragment, TagFragmentEnum.CAD_NEGOCIO.toString(), null);
                 return true;
             case R.id.nav_gerenciar_negocio:
                 return true;
@@ -129,11 +126,11 @@ public class MainActivity extends AppCompatActivity
      * data - usado para passar dados da activity para o fragmento
      * se é null, então não tem dados
      */
-    private void abreFragmento(Fragment fragmento, String nome, Integer data) {
+    private void abreFragmento(Fragment fragmento, String nome, Integer dados) {
 
-        if (data != null){
+        if (dados != null){
             Bundle bundle = new Bundle();
-            bundle.putInt("tabSelecionada", data);
+            bundle.putInt("tabSelecionada", dados);
             fragmento.setArguments(bundle);
         }
 
