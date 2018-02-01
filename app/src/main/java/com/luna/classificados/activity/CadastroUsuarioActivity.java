@@ -165,7 +165,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
     private void inserirUsuarioArquivoPreferencias(String uuid) {
 
         Preferencias preferencias = new Preferencias(CadastroUsuarioActivity.this);
-        preferencias.salvarDados( uuid );
+        preferencias.salvarDadosUsuario( uuid);
 
     }
 

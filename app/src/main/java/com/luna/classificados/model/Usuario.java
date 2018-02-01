@@ -9,7 +9,7 @@ public class Usuario {
     private String id;
     private String email;
     private String senha;
-    private String idCondominio;
+    private String condominio;
 
     public Usuario(){
 
@@ -32,12 +32,12 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getIdCondominio() {
-        return idCondominio;
+    public String getCondominio() {
+        return condominio;
     }
 
-    public void setIdCondominio(String idCondominio) {
-        this.idCondominio = idCondominio;
+    public void setCondominio(String condominio) {
+        this.condominio = condominio;
     }
 
     @Exclude
@@ -59,8 +59,9 @@ public class Usuario {
     public void salvaCondominio(DatabaseReference referenciaBanco){
 
         DatabaseReference referenciaUsuario = referenciaBanco.child("usuarios").child(getId());
-        referenciaUsuario.child("condominio").setValue(getIdCondominio());
+        referenciaUsuario.child("condominio").setValue(getCondominio());
 
     }
+
 
 }
