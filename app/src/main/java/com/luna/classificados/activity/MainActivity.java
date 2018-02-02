@@ -14,13 +14,23 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.view.View;
+import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.luna.classificados.R;
 import com.luna.classificados.fragment.CadastroNegocioFragment;
 import com.luna.classificados.fragment.MainFragment;
 import com.luna.classificados.helper.FirebaseAutenticacao;
+import com.luna.classificados.helper.FirebaseBanco;
+import com.luna.classificados.helper.Preferencias;
+import com.luna.classificados.model.Condominio;
+import com.luna.classificados.model.Usuario;
 import com.luna.classificados.utils.TagFragmentEnum;
 
 
@@ -28,6 +38,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
+    public ValueEventListener valueEventListenerUsuario;
+    public NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +51,7 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
+
         // Menu lateral esquerdo
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -45,8 +59,31 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Preferencias preferencias = new Preferencias(this);
+        String idUsuario = preferencias.getIdentificador();
+
+        DatabaseReference referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(idUsuario);
+
+        valueEventListenerUsuario = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+               Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                View hView = navigationView.getHeaderView(0);
+                TextView header_user = hView.findViewById(R.id.header_user);
+                header_user.setText(usuario.getNome());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+//
+
 
         //Carrega o fragmento de anuncios e negocios no "conteudo" do main activity
         Fragment fragment = new MainFragment();

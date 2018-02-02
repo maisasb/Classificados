@@ -29,16 +29,18 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
 
     public EditText emailText;
     public EditText senhaText;
+    public EditText nomeText;
     public Button buttonCadastrar;
     public EditText confirmarSenhaText;
     public TextView textErrorConfirmPass;
-
+    public Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
 
+        nomeText = findViewById(R.id.nomeText);
         emailText = findViewById(R.id.emailText);
         senhaText = findViewById(R.id.senhaText);
         confirmarSenhaText = findViewById(R.id.confirmarSenhaText);
@@ -55,11 +57,12 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
                     if ( verifyPassword()){
 
 
-                        Usuario usuario = new Usuario();
+                        usuario = new Usuario();
+                        usuario.setNome (nomeText.getText().toString());
                         usuario.setEmail(emailText.getText().toString());
                         usuario.setSenha(senhaText.getText().toString());
 
-                        cadastrarUsuario(usuario);
+                        cadastrarUsuario();
 
                     }
                 }else{
@@ -119,7 +122,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
 
     }
 
-    private void cadastrarUsuario(Usuario usuario){
+    private void cadastrarUsuario(){
 
         final FirebaseAuth firebaseAutenticacao = FirebaseAutenticacao.getFirebaseAutenticacao();
         firebaseAutenticacao.createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
@@ -132,7 +135,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
 
                             FirebaseUser user = task.getResult().getUser();
 
-                            salvaUsuario(user);
+                            usuario.setId(user.getUid());
+
+                            usuario.salvar();
                             
                             enviaEmail();
 
@@ -183,16 +188,4 @@ public class CadastroUsuarioActivity extends AppCompatActivity{
 
     }
 
-    private void salvaUsuario(FirebaseUser user) {
-
-        Usuario usuario = new Usuario();
-        usuario.setId(user.getUid());
-        usuario.setEmail(user.getEmail());
-
-        usuario.salvar();
-
-
-
-    }
-
-}
+ }

@@ -4,13 +4,14 @@
     <color name="colorPrimaryDark">#008FB2</color>
     <color name="colorPrimaryDarker">#34488f</color>
     <color name="colorAccent">#FF9719</color>
-    <color name="backgroundPrimary">#FFFFFF</color>
-    <color name="backgroundAccent">#14A8CC</color>
     <color name="textPrimary">#FFFFFF</color>
     <color name="textDark">#333333</color>
     <color name="error">#ff4b19</color>
-    <color name="fieldsBackground">#f2f2f2</color>
 
-    <color name="colorBackgroundMenu">#14A8CC</color>
+    <color name="backgroundPrimary">#FFFFFF</color>
+    <color name="backgroundAccent">#14A8CC</color>
+    <color name="fieldsBackground">#f2f2f2</color>
+    <color name="colorBackgroundMenuPrincipal">#14A8CC</color>
+    <color name="colorBackgroundFrame">#FFFFFF</color>
 
 </resources>

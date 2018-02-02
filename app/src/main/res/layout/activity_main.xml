@@ -35,7 +35,8 @@
                 android:id="@+id/conteudo"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@color/colorBackgroundFrame" >
             </FrameLayout>
 
         </LinearLayout>
@@ -49,5 +50,5 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/menu_header"
             app:menu="@menu/menu_navegacao"
-            android:background="@color/colorBackgroundMenu" />
+            android:background="@color/colorBackgroundMenuPrincipal" />
     </android.support.v4.widget.DrawerLayout>
