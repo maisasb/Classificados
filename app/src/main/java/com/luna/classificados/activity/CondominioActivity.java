@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class CondominioActivity extends AppCompatActivity {
 
-    public Spinner condominiumSpinner;
+    public Spinner condominioSpinner;
     public DatabaseReference referenciaBanco;
     public ArrayList<Condominio> condominioLista;
     public ArrayAdapter dataAdapter;
@@ -49,7 +49,7 @@ public class CondominioActivity extends AppCompatActivity {
 
         condominioLista = new ArrayList<>();
 
-        condominiumSpinner = findViewById(R.id.condominiumSpinner);
+        condominioSpinner = findViewById(R.id.condominiumSpinner);
         botaoContinuar =  findViewById(R.id.botaoContinuar);
 
         referenciaBanco = FirebaseBanco.getFirebaseBanco().child("condominios");
@@ -81,7 +81,7 @@ public class CondominioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Condominio condominioSelecionado = (Condominio) condominiumSpinner.getSelectedItem();
+                Condominio condominioSelecionado = (Condominio) condominioSpinner.getSelectedItem();
 
                 Preferencias preferencias = new Preferencias(CondominioActivity.this);
                 String idUsuarioLogado = preferencias.getIdentificador();
@@ -99,7 +99,7 @@ public class CondominioActivity extends AppCompatActivity {
 
         dataAdapter = new ArrayAdapter(this, R.layout.item_spinner_condominios, condominioLista);
         dataAdapter.setDropDownViewResource(R.layout.dropdown_spinner_condominios);
-        condominiumSpinner.setAdapter(dataAdapter);
+        condominioSpinner.setAdapter(dataAdapter);
 
     }
 

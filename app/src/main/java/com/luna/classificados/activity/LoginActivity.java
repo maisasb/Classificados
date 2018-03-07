@@ -212,7 +212,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void inserirCondominioArquivoPreferencias(String id) {
 
-        preferencias.salvarDadosUsuario( id );
+        preferencias.salvarDadosCondominio( id );
 
     }
 

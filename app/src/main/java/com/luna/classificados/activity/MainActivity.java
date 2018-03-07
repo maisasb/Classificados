@@ -29,7 +29,7 @@ import com.luna.classificados.fragment.MainFragment;
 import com.luna.classificados.helper.FirebaseAutenticacao;
 import com.luna.classificados.helper.FirebaseBanco;
 import com.luna.classificados.helper.Preferencias;
-import com.luna.classificados.model.Condominio;
+//import com.luna.classificados.model.Condominio;
 import com.luna.classificados.model.Usuario;
 import com.luna.classificados.utils.TagFragmentEnum;
 
@@ -40,7 +40,13 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     public ValueEventListener valueEventListenerUsuario;
     public NavigationView navigationView;
+    public DatabaseReference referenciaBanco;
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        referenciaBanco.removeEventListener(valueEventListenerUsuario);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         Preferencias preferencias = new Preferencias(this);
         String idUsuario = preferencias.getIdentificador();
 
-        DatabaseReference referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(idUsuario);
+        referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(idUsuario);
 
         valueEventListenerUsuario = new ValueEventListener() {
             @Override
@@ -82,7 +88,8 @@ public class MainActivity extends AppCompatActivity
 
             }
         };
-//
+
+        referenciaBanco.addListenerForSingleValueEvent(valueEventListenerUsuario);
 
 
         //Carrega o fragmento de anuncios e negocios no "conteudo" do main activity

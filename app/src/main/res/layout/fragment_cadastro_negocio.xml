@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundAccent"
     android:fillViewport="true">
 
     <RelativeLayout
@@ -32,7 +33,7 @@
             android:text="@string/cad_nome" />
 
         <EditText
-            android:id="@+id/cadNome"
+            android:id="@+id/nomeNegocio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView7"
@@ -40,20 +41,20 @@
             android:layout_marginRight="@dimen/margin_right"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/cadNome"
+            android:layout_below="@+id/nomeNegocio"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/cad_breve_desc" />
 
         <EditText
-            android:id="@+id/cadBreveDesc"
+            android:id="@+id/descBreveNegocio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView8"
@@ -66,13 +67,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/cadBreveDesc"
+            android:layout_below="@+id/descBreveNegocio"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/cad_desc" />
 
         <EditText
-            android:id="@+id/cadDescricao"
+            android:id="@+id/descNegocio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView9"
@@ -86,12 +87,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/cadDescricao"
+            android:layout_below="@+id/descNegocio"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/cad_categoria" />
         <Spinner
-            android:id="@+id/cadSpinnerCategoria"
+            android:id="@+id/spinnerCategoria"
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,13 +108,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/cadSpinnerCategoria"
+            android:layout_below="@+id/spinnerCategoria"
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:text="@string/cad_contato" />
 
         <EditText
-            android:id="@+id/cadContato"
+            android:id="@+id/contatoNegocio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView11"
@@ -127,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/cadContato"
+            android:layout_below="@+id/contatoNegocio"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/cad_aberto" />
@@ -138,8 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView12"
             android:layout_alignBottom="@+id/textView12"
-            android:layout_toEndOf="@+id/textView11"
-            android:text="Switch" />
+            android:layout_toEndOf="@+id/textView11" />
 
         <Button
             android:id="@+id/botaoCadastrar"
