@@ -86,5 +86,9 @@ public class Negocio {
 
     }
 
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }
 

@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.luna.classificados.R;
 import com.luna.classificados.fragment.CadastroNegocioFragment;
+import com.luna.classificados.fragment.GerenciarNegociosFragment;
 import com.luna.classificados.fragment.MainFragment;
 import com.luna.classificados.helper.FirebaseAutenticacao;
 import com.luna.classificados.helper.FirebaseBanco;
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity
                 abreFragmento(fragment, TagFragmentEnum.CAD_NEGOCIO.toString(), null);
                 return true;
             case R.id.nav_gerenciar_negocio:
+                Fragment fragmentNegocio = new GerenciarNegociosFragment();
+                abreFragmento(fragmentNegocio, TagFragmentEnum.GERENCIA_NEGOCIO.toString(), null);
                 return true;
             case R.id.nav_configuracoes:
                 return true;

@@ -35,4 +35,10 @@
 
     </style>
 
+    <style name="TituloTelasStyle">
+        <item name="android:padding">20dp</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
 </resources>

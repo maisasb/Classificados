@@ -58,4 +58,7 @@
     <string name="titulo_tab_anuncios">"ANÚNCIOS"</string>
     <string name="titulo_tab_negocios">"NEGÓCIOS"</string>
 
+    <!-- Tela gerenciar negocios -->
+    <string name="titulo_tela_negocio">Seus empreendimentos cadastrados</string>
+
 </resources>

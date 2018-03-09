@@ -6,5 +6,6 @@ package com.luna.classificados.utils;
 
 public enum TagFragmentEnum {
     MAIN,
-    CAD_NEGOCIO
+    CAD_NEGOCIO,
+    GERENCIA_NEGOCIO
 }
