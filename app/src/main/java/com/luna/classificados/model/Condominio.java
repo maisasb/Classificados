@@ -1,6 +1,7 @@
 package com.luna.classificados.model;
 
 import com.google.firebase.database.DatabaseReference;
+import com.luna.classificados.helper.FirebaseBanco;
 
 /**
  * Created by Asus on 22/01/2018.
@@ -34,6 +35,11 @@ public class Condominio {
     public void salvaUsuario(DatabaseReference referenciaBanco, String idUsuarioLogado){
         DatabaseReference referenciaCondominio = referenciaBanco.child("condominios").child(getId());
         referenciaCondominio.child("usuarios").child(idUsuarioLogado).setValue(true);
+    }
+
+    public void salvaNegocio(String idNegocio){
+        DatabaseReference referenciaBanco = FirebaseBanco.getFirebaseBanco().child("condominios").child(getId());
+        referenciaBanco.child("negocios").child(idNegocio).setValue(true);
     }
 
     @Override

@@ -24,6 +24,7 @@ import com.luna.classificados.activity.MainActivity;
 import com.luna.classificados.helper.FirebaseBanco;
 import com.luna.classificados.helper.Preferencias;
 import com.luna.classificados.model.Categoria;
+import com.luna.classificados.model.Condominio;
 import com.luna.classificados.model.Negocio;
 import com.luna.classificados.model.Usuario;
 import com.luna.classificados.utils.TagFragmentEnum;
@@ -130,7 +131,12 @@ public class CadastroNegocioFragment extends Fragment {
                         //Salva negocio no usuário
                         Usuario usuario = new Usuario();
                         usuario.setId(idUsuario);
-                        usuario.salvaNegocio(referenciaBanco,idNegocio);
+                        usuario.salvaNegocio(idNegocio);
+
+                        String idCondominio = preferencias.getCondominio();
+                        Condominio condominio = new Condominio();
+                        condominio.setId(idCondominio);
+                        condominio.salvaNegocio(idNegocio);
 
                         abrirTelaGerenciamento();
                     }
