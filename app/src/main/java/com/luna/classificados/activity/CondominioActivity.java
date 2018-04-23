@@ -49,7 +49,7 @@ public class CondominioActivity extends AppCompatActivity {
 
         condominioLista = new ArrayList<>();
 
-        condominioSpinner = findViewById(R.id.condominiumSpinner);
+        condominioSpinner = findViewById(R.id.spinnerCondominio);
         botaoContinuar =  findViewById(R.id.botaoContinuar);
 
         referenciaBanco = FirebaseBanco.getFirebaseBanco().child("condominios");
@@ -97,8 +97,8 @@ public class CondominioActivity extends AppCompatActivity {
             }
         });
 
-        dataAdapter = new ArrayAdapter(this, R.layout.item_spinner_condominios, condominioLista);
-        dataAdapter.setDropDownViewResource(R.layout.dropdown_spinner_condominios);
+        dataAdapter = new ArrayAdapter(this, R.layout.item_spinner, condominioLista);
+        dataAdapter.setDropDownViewResource(R.layout.dropdown_spinner);
         condominioSpinner.setAdapter(dataAdapter);
 
     }

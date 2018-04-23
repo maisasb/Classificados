@@ -91,6 +91,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/cad_categoria" />
+
         <Spinner
             android:id="@+id/spinnerCategoria"
             style="@style/Widget.AppCompat.Spinner.Underlined"

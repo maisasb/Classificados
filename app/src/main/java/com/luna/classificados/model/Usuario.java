@@ -68,5 +68,11 @@ public class Usuario {
 
     }
 
+    public void salvaNegocio(DatabaseReference referenciaBanco, String idNegocio){
+
+        referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(getId());
+        referenciaBanco.child("negocios").child(idNegocio).setValue(true);
+
+    }
 
 }
