@@ -22,6 +22,7 @@ public class Negocio {
 
     }
 
+    @Exclude
     public String getId() {
         return id;
     }
@@ -88,7 +89,7 @@ public class Negocio {
 
     @Override
     public String toString() {
-        return getNome();
+        return getId() + " - " +getNome() ;
     }
 }
 

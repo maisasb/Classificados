@@ -13,7 +13,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.luna.classificados.R;
+import com.luna.classificados.adapter.GerenciarNegocioAdapter;
 import com.luna.classificados.helper.FirebaseBanco;
+import com.luna.classificados.helper.Preferencias;
+import com.luna.classificados.model.Condominio;
 import com.luna.classificados.model.Negocio;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ public class GerenciarNegociosFragment extends Fragment {
     public ValueEventListener valueEventListenerNegocios;
     public DatabaseReference referenciaBanco;
     public ArrayList<Negocio> negocioLista;
-    public ArrayAdapter dataAdapter;
+    public GerenciarNegocioAdapter dataAdapter;
 
     @Override
     public void onStop() {
@@ -51,22 +54,48 @@ public class GerenciarNegociosFragment extends Fragment {
         listViewNegocios = view.findViewById(R.id.listViewNegocios);
         negocioLista = new ArrayList<Negocio>();
 
-        referenciaBanco = FirebaseBanco.getFirebaseBanco().child("condominios");
+        Preferencias preferencias = new Preferencias(getActivity());
+        String idUsuario = preferencias.getIdentificador();
+
+        referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(idUsuario).child("negocios");
 
         valueEventListenerNegocios = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot condominiosId : dataSnapshot.getChildren()){
+                //Para cada negocio encontrado no usuário
+                for(DataSnapshot negociosId : dataSnapshot.getChildren()){
 
-                    Negocio negocio = condominiosId.getValue(Negocio.class);
-                    if (negocio != null){
-                        negocio.setId(condominiosId.getKey());
-                        negocioLista.add(negocio);
-                    }
+                    //Pega a referência do banco do negócio
+                    DatabaseReference referenciaNegocio = FirebaseBanco.getFirebaseBanco().child("negocios").child(negociosId.getKey());
+
+                    //Cria um listener para cada negócio encontrado
+                    ValueEventListener eventListenerGetNegocio = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            //Recebe a entidade negocio
+                            Negocio negocioEntidade = dataSnapshot.getValue(Negocio.class);
+                            if (negocioEntidade != null){
+                                negocioEntidade.setId(dataSnapshot.getKey());
+                                negocioLista.add(negocioEntidade);
+                                dataAdapter.notifyDataSetChanged();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    };
+                    referenciaNegocio.addListenerForSingleValueEvent(eventListenerGetNegocio);
+
+
+
 
                 }
-                dataAdapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -75,7 +104,8 @@ public class GerenciarNegociosFragment extends Fragment {
             }
         };
 
-        dataAdapter = new ArrayAdapter<Negocio>(getActivity(), android.R.layout.simple_list_item_1, negocioLista);
+        //Exibindo a lista no adapter personalizado
+        dataAdapter = new GerenciarNegocioAdapter(negocioLista, getActivity());
         listViewNegocios.setAdapter(dataAdapter);
 
         return view;
