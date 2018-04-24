@@ -91,9 +91,6 @@ public class GerenciarNegociosFragment extends Fragment {
                     };
                     referenciaNegocio.addListenerForSingleValueEvent(eventListenerGetNegocio);
 
-
-
-
                 }
 
             }
