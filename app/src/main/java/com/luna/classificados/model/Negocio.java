@@ -8,7 +8,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.luna.classificados.helper.FirebaseBanco;
 
-public class Negocio {
+import java.io.Serializable;
+
+public class Negocio implements Serializable{
 
     private String id;
     private String usuario;

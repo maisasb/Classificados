@@ -57,7 +57,8 @@
     <string name="frag_negocios">Negócios</string>
     <string name="titulo_tab_anuncios">"ANÚNCIOS"</string>
     <string name="titulo_tab_negocios">"NEGÓCIOS"</string>
-    <string name="titulo_tela_negocios">Empreencimentos do condomínio</string>
+    <string name="titulo_tela_negocios">Empreendimentos do condomínio</string>
+    <string name="titulo_tela_detalhe_negocio">Negócio detalhado</string>
 
     <!-- Tela gerenciar negocios -->
     <string name="titulo_gerenciar_negocio">Seus empreendimentos cadastrados</string>

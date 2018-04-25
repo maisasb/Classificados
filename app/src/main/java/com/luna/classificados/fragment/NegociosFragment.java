@@ -3,9 +3,12 @@ package com.luna.classificados.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +20,7 @@ import com.luna.classificados.adapter.ListaNegociosAdapter;
 import com.luna.classificados.helper.FirebaseBanco;
 import com.luna.classificados.helper.Preferencias;
 import com.luna.classificados.model.Negocio;
+import com.luna.classificados.utils.TagFragmentEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +35,6 @@ public class NegociosFragment extends Fragment {
     public ListaNegociosAdapter listaNegociosAdapter;
     public DatabaseReference referenciaBanco;
     public ValueEventListener valueEventListenerNegocios;
-
 
 
     public NegociosFragment() {
@@ -105,6 +108,25 @@ public class NegociosFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        listViewNegocios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Negocio negocio = listaNegociosAdapter.getItem(position);
+
+                Fragment fragmentNegocio = new DetalhesNegocioFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("negocio",negocio);
+                fragmentNegocio.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.conteudo, fragmentNegocio, TagFragmentEnum.DETALHE_NEGOCIO.toString());
+
+                getActivity().getSupportFragmentManager().popBackStack();
+                fragmentTransaction.commit();
             }
         });
 

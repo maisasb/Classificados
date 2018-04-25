@@ -33,7 +33,7 @@ public class ListaNegociosAdapter extends BaseAdapter  {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Negocio getItem(int position) {
         return negocios.get(position);
     }
 
@@ -53,7 +53,7 @@ public class ListaNegociosAdapter extends BaseAdapter  {
         TextView textDescricao = view.findViewById(R.id.descricao);
 
         textNome.setText(negocio.getNome());
-        textDescricao.setText(negocio.getDescricao());
+        textDescricao.setText(negocio.getDescBreve());
 
 
          //TODO completar lista com status do negocio
