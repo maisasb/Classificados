@@ -42,7 +42,7 @@ public class GerenciarNegociosFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        referenciaBanco.addListenerForSingleValueEvent(valueEventListenerNegocios);
+
     }
 
     @Override
@@ -59,7 +59,7 @@ public class GerenciarNegociosFragment extends Fragment {
 
         referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(idUsuario).child("negocios");
 
-        valueEventListenerNegocios = new ValueEventListener() {
+        referenciaBanco.addListenerForSingleValueEvent(valueEventListenerNegocios = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -69,8 +69,10 @@ public class GerenciarNegociosFragment extends Fragment {
                     //Pega a referência do banco do negócio
                     DatabaseReference referenciaNegocio = FirebaseBanco.getFirebaseBanco().child("negocios").child(negociosId.getKey());
 
+                    ValueEventListener eventListenter;
+
                     //Cria um listener para cada negócio encontrado
-                    ValueEventListener eventListenerGetNegocio = new ValueEventListener() {
+                    referenciaNegocio.addListenerForSingleValueEvent(eventListenter = new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -88,8 +90,9 @@ public class GerenciarNegociosFragment extends Fragment {
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
-                    };
-                    referenciaNegocio.addListenerForSingleValueEvent(eventListenerGetNegocio);
+                    });
+
+                    referenciaNegocio.removeEventListener(eventListenter);
 
                 }
 
@@ -99,7 +102,8 @@ public class GerenciarNegociosFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        };
+        });
+
 
         //Exibindo a lista no adapter personalizado
         dataAdapter = new GerenciarNegocioAdapter(negocioLista, getActivity());

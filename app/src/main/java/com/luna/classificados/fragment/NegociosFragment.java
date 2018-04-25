@@ -47,7 +47,6 @@ public class NegociosFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        referenciaBanco.addListenerForSingleValueEvent(valueEventListenerNegocios);
     }
 
 
@@ -68,7 +67,7 @@ public class NegociosFragment extends Fragment {
 
         referenciaBanco = FirebaseBanco.getFirebaseBanco().child("condominios").child(idCondominio).child("negocios");
 
-        valueEventListenerNegocios = new ValueEventListener() {
+        referenciaBanco.addValueEventListener(valueEventListenerNegocios = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -78,8 +77,10 @@ public class NegociosFragment extends Fragment {
                     //Pega a referência do banco do negócio
                     DatabaseReference referenciaNegocio = FirebaseBanco.getFirebaseBanco().child("negocios").child(negociosId.getKey());
 
+                    ValueEventListener eventListener;
+
                     //Cria um listener para cada negócio encontrado
-                    ValueEventListener eventListenerGetNegocio = new ValueEventListener() {
+                    referenciaNegocio.addListenerForSingleValueEvent(eventListener = new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -97,15 +98,15 @@ public class NegociosFragment extends Fragment {
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
-                    };
-                    referenciaNegocio.addListenerForSingleValueEvent(eventListenerGetNegocio);
+                    });
+                    referenciaNegocio.removeEventListener(eventListener);
                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        };
+        });
 
         return view;
 
