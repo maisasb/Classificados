@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.luna.classificados.R;
@@ -19,8 +22,6 @@ public class GerenciarNegocioAdapter extends BaseAdapter {
 
     private List<Negocio> negocios;
     private Activity activity;
-    private String nome;
-    private String descricao;
 
     public GerenciarNegocioAdapter(List<Negocio> negocios, Activity activity) {
         this.negocios = negocios;
@@ -47,13 +48,25 @@ public class GerenciarNegocioAdapter extends BaseAdapter {
 
         View view = activity.getLayoutInflater().inflate(R.layout.item_gerenciar_negocio_adapter, parent, false);
 
-        Negocio negocio = negocios.get(position);
+        final Negocio negocio = negocios.get(position);
 
         TextView textNome = view.findViewById(R.id.nome);
         TextView textDescricao = view.findViewById(R.id.descricao);
+        Switch switchItemNegocio = view.findViewById(R.id.switchItemNegocio);
 
         textNome.setText(negocio.getNome());
         textDescricao.setText(negocio.getDescricao());
+        switchItemNegocio.setChecked(negocio.getStatus());
+
+        switchItemNegocio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
+                negocio.setStatus(isChecked);
+                negocio.salvar();
+
+            }
+        });
 
         return view;
     }

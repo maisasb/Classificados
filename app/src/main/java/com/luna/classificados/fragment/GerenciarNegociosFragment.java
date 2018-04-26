@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -110,6 +111,8 @@ public class GerenciarNegociosFragment extends Fragment {
         listViewNegocios.setAdapter(dataAdapter);
 
         return view;
+
+        // TODO configurar edicao do negocio
     }
 
 }

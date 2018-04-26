@@ -19,6 +19,11 @@ public class Negocio implements Serializable{
     private String descricao;
     private String categoria;
     private String contato;
+    private boolean status;
+
+
+
+    private boolean whatsapp;
 
     public Negocio(){
 
@@ -79,6 +84,22 @@ public class Negocio implements Serializable{
 
     public void setContato(String contato) {
         this.contato = contato;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public boolean isWhatsapp() {
+        return whatsapp;
+    }
+
+    public void setWhatsapp(boolean whatsapp) {
+        this.whatsapp = whatsapp;
     }
 
 

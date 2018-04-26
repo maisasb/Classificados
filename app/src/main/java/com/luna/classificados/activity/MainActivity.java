@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //menu lateral direito
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -134,6 +135,8 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
+    // Menu lateral esquerdo
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -143,6 +146,8 @@ public class MainActivity extends AppCompatActivity
 
         switch (item.getItemId()){
             case R.id.nav_anuncios:
+              /*  Fragment fragmentAnuncio = new MainFragment();
+                abreFragmento(fragmentAnuncio, TagFragmentEnum.ANUNCIO.toString(), 1); */
                 return true;
             case R.id.nav_negocios:
                 Fragment fragmentMain = new MainFragment();
@@ -156,11 +161,12 @@ public class MainActivity extends AppCompatActivity
                 Fragment fragmentNegocio = new GerenciarNegociosFragment();
                 abreFragmento(fragmentNegocio, TagFragmentEnum.GERENCIA_NEGOCIO.toString(), null);
                 return true;
-            case R.id.nav_configuracoes:
-                return true;
             case R.id.nav_sair:
                 logoutApp();
                 return true;
+            case R.id.nav_configuracoes:
+                return true;
+
         }
 
 

@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +45,8 @@ public class CadastroNegocioFragment extends Fragment {
     public EditText descNegocio;
     public EditText contatoNegocio;
     public Spinner categoriaNegocio;
+    public Switch cadSwitch;
+    public CheckBox whatsapp;
     public Button botaoCadastrar;
     public ArrayList<Categoria> categoriaLista;
     public ArrayAdapter dataAdapter;
@@ -81,6 +85,8 @@ public class CadastroNegocioFragment extends Fragment {
         contatoNegocio = view.findViewById(R.id.contatoNegocio);
         categoriaNegocio = view.findViewById(R.id.spinnerCategoria);
         botaoCadastrar = view.findViewById(R.id.botaoCadastrar);
+        cadSwitch = view.findViewById(R.id.cadSwitch);
+        whatsapp = view.findViewById(R.id.checkWhatsapp);
 
 
         valueEventListenerCategoria = new ValueEventListener() {
@@ -118,6 +124,8 @@ public class CadastroNegocioFragment extends Fragment {
                         negocio.setContato(contatoNegocio.getText().toString());
                         Categoria categoria = (Categoria) categoriaNegocio.getSelectedItem();
                         negocio.setCategoria(categoria.getId());
+                        negocio.setStatus(cadSwitch.isChecked());
+                        negocio.setWhatsapp(whatsapp.isChecked());
 
                         Calendar timeStamp = Calendar.getInstance();
                         String idNegocio = String.valueOf(timeStamp.getTimeInMillis());

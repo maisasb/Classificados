@@ -118,40 +118,53 @@
             android:id="@+id/contatoNegocio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView11"
-            android:layout_alignBottom="@+id/textView11"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:inputType="phone" />
+            android:layout_alignStart="@+id/textView12"
+            android:layout_below="@+id/textView11"
+            android:layout_marginTop="13dp"
+            android:ems="8"
+            android:inputType="phone"
+            android:maxLength="12"
+            android:singleLine="false" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@+id/textView7"
             android:layout_below="@+id/contatoNegocio"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/cad_aberto" />
 
         <Switch
-            android:id="@+id/cadSwitchAberto"
+            android:id="@+id/cadSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView12"
             android:layout_alignBottom="@+id/textView12"
-            android:layout_toEndOf="@+id/textView11" />
+            android:layout_toEndOf="@+id/textView11"
+            android:theme="@style/Switch"
+            android:checked="true" />
 
         <Button
             android:id="@+id/botaoCadastrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cadSwitchAberto"
+            android:layout_below="@+id/cadSwitch"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="34dp"
             android:text="@string/cad_cadastrar"
             android:background="@drawable/botao"
             android:theme="@style/buttonTheme"/>
+
+        <CheckBox
+            android:id="@+id/checkWhatsapp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/contatoNegocio"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/contatoNegocio"
+            android:text="Whatsapp?" />
 
 
     </RelativeLayout>
