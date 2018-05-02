@@ -20,9 +20,6 @@ public class Negocio implements Serializable{
     private String categoria;
     private String contato;
     private boolean status;
-
-
-
     private boolean whatsapp;
 
     public Negocio(){
