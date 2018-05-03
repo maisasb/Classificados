@@ -52,6 +52,8 @@ public class CadastroNegocioFragment extends Fragment {
     public ArrayAdapter dataAdapter;
     public DatabaseReference referenciaBanco;
     public ValueEventListener valueEventListenerCategoria;
+    public boolean CADASTRO = true;
+    public Negocio negocio = null;
 
 
     @Override
@@ -74,6 +76,7 @@ public class CadastroNegocioFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cadastro_negocio, container, false);
 
+
         categoriaLista = new ArrayList<>();
 
         referenciaBanco = FirebaseBanco.getFirebaseBanco().child("categorias");
@@ -83,15 +86,39 @@ public class CadastroNegocioFragment extends Fragment {
         descNegocio = view.findViewById(R.id.descNegocio);
         categoriaNegocio = view.findViewById(R.id.spinnerCategoria);
         contatoNegocio = view.findViewById(R.id.contatoNegocio);
-        categoriaNegocio = view.findViewById(R.id.spinnerCategoria);
         botaoCadastrar = view.findViewById(R.id.botaoCadastrar);
         cadSwitch = view.findViewById(R.id.cadSwitch);
         whatsapp = view.findViewById(R.id.checkWhatsapp);
+
+        Bundle bundle = getArguments();
+
+        if (bundle != null){
+            negocio = (Negocio) bundle.getSerializable("negocio");
+        }
+
+
+        if (negocio != null){
+            CADASTRO = false;
+            nomeNegocio.setText(negocio.getNome());
+            descBreveNegocio.setText(negocio.getDescBreve());
+            descNegocio.setText(negocio.getDescricao());
+            contatoNegocio.setText(negocio.getContato());
+            cadSwitch.setChecked(negocio.getStatus());
+            whatsapp.setChecked(negocio.isWhatsapp());
+            botaoCadastrar.setText("EDITAR");
+
+        }else{
+            botaoCadastrar.setText("CADASTRAR");
+            CADASTRO = true;
+            negocio = new Negocio();
+        }
 
 
         valueEventListenerCategoria = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Categoria categoriaSelecionada = null;
 
                 for(DataSnapshot categoriasId : dataSnapshot.getChildren()){
 
@@ -99,10 +126,21 @@ public class CadastroNegocioFragment extends Fragment {
                     if (categoria != null){
                         categoria.setId(categoriasId.getKey());
                         categoriaLista.add(categoria);
+
+                        if (!CADASTRO){
+                            if (negocio.getCategoria().equals(categoria.getId())){
+                                categoriaSelecionada = categoria;
+                            }
+                        }
+
                     }
 
                 }
                 dataAdapter.notifyDataSetChanged();
+
+                if (!CADASTRO) {
+                    categoriaNegocio.setSelection(dataAdapter.getPosition(categoriaSelecionada));
+                }
             }
 
             @Override
@@ -117,7 +155,6 @@ public class CadastroNegocioFragment extends Fragment {
             public void onClick(View view) {
                 if (validaCampos()){
 
-                        Negocio negocio = new Negocio();
                         negocio.setNome(nomeNegocio.getText().toString());
                         negocio.setDescBreve(descBreveNegocio.getText().toString());
                         negocio.setDescricao(descNegocio.getText().toString());
@@ -127,24 +164,29 @@ public class CadastroNegocioFragment extends Fragment {
                         negocio.setStatus(cadSwitch.isChecked());
                         negocio.setWhatsapp(whatsapp.isChecked());
 
-                        Calendar timeStamp = Calendar.getInstance();
-                        String idNegocio = String.valueOf(timeStamp.getTimeInMillis());
-                        negocio.setId(idNegocio);
+                        if(CADASTRO){
+                            Calendar timeStamp = Calendar.getInstance();
+                            String idNegocio = String.valueOf(timeStamp.getTimeInMillis());
+                            negocio.setId(idNegocio);
 
-                        Preferencias preferencias = new Preferencias(getActivity());
-                        String idUsuario = preferencias.getIdentificador();
-                        negocio.setUsuario(idUsuario);
-                        negocio.salvar();
+                            Preferencias preferencias = new Preferencias(getActivity());
+                            String idUsuario = preferencias.getIdentificador();
+                            negocio.setUsuario(idUsuario);
 
-                        //Salva negocio no usuário
-                        Usuario usuario = new Usuario();
-                        usuario.setId(idUsuario);
-                        usuario.salvaNegocio(idNegocio);
+                            negocio.salvar();
 
-                        String idCondominio = preferencias.getCondominio();
-                        Condominio condominio = new Condominio();
-                        condominio.setId(idCondominio);
-                        condominio.salvaNegocio(idNegocio);
+                            //Salva negocio no usuário
+                            Usuario usuario = new Usuario();
+                            usuario.setId(idUsuario);
+                            usuario.salvaNegocio(idNegocio);
+
+                            String idCondominio = preferencias.getCondominio();
+                            Condominio condominio = new Condominio();
+                            condominio.setId(idCondominio);
+                            condominio.salvaNegocio(idNegocio);
+                        }else{
+                            negocio.atualizar();
+                        }
 
                         abrirTelaGerenciamento();
                     }

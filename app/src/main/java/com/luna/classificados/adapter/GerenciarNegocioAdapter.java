@@ -34,7 +34,7 @@ public class GerenciarNegocioAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Negocio getItem(int position) {
         return negocios.get(position);
     }
 
@@ -55,7 +55,7 @@ public class GerenciarNegocioAdapter extends BaseAdapter {
         Switch switchItemNegocio = view.findViewById(R.id.switchItemNegocio);
 
         textNome.setText(negocio.getNome());
-        textDescricao.setText(negocio.getDescricao());
+        textDescricao.setText(negocio.getDescBreve());
         switchItemNegocio.setChecked(negocio.getStatus());
 
         switchItemNegocio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

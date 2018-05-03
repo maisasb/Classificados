@@ -2,9 +2,12 @@ package com.luna.classificados.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -19,6 +22,7 @@ import com.luna.classificados.helper.FirebaseBanco;
 import com.luna.classificados.helper.Preferencias;
 import com.luna.classificados.model.Condominio;
 import com.luna.classificados.model.Negocio;
+import com.luna.classificados.utils.TagFragmentEnum;
 
 import java.util.ArrayList;
 
@@ -110,9 +114,30 @@ public class GerenciarNegociosFragment extends Fragment {
         dataAdapter = new GerenciarNegocioAdapter(negocioLista, getActivity());
         listViewNegocios.setAdapter(dataAdapter);
 
+
+        listViewNegocios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Negocio negocio = dataAdapter.getItem(position);
+
+                Fragment fragmentNegocio = new CadastroNegocioFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("negocio",negocio);
+                fragmentNegocio.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.conteudo, fragmentNegocio, TagFragmentEnum.CAD_NEGOCIO.toString());
+
+                getActivity().getSupportFragmentManager().popBackStack();
+                fragmentTransaction.commit();
+            }
+        });
+
         return view;
 
-        // TODO configurar edicao do negocio
+
     }
 
 }

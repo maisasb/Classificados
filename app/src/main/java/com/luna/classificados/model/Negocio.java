@@ -9,6 +9,8 @@ import com.google.firebase.database.Exclude;
 import com.luna.classificados.helper.FirebaseBanco;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Negocio implements Serializable{
 
@@ -105,6 +107,27 @@ public class Negocio implements Serializable{
         DatabaseReference reference = FirebaseBanco.getFirebaseBanco();
         reference.child("negocios").child(getId()).setValue(this);
 
+    }
+
+    public void atualizar(){
+        DatabaseReference reference = FirebaseBanco.getFirebaseBanco().child("negocios").child(getId());
+        reference.updateChildren(toMap());
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("nome", nome);
+        result.put("descBreve", descBreve);
+        result.put("descricao", descricao);
+        result.put("usuario", usuario);
+        result.put("categoria", categoria);
+        result.put("contato", contato);
+        result.put("status", status);
+        result.put("whatsapp", whatsapp);
+
+        return result;
     }
 
     @Override
