@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.luna.classificados.R;
@@ -19,7 +20,10 @@ public class DetalhesNegocioFragment extends Fragment {
 
     public TextView nomeNegocio;
     public TextView descricaoBreveNegocio;
-    public EditText descricaoNegocio;
+    public TextView descricaoNegocio;
+    public TextView statusNegocio;
+    public boolean status;
+
 
     public DetalhesNegocioFragment() {
         // Required empty public constructor
@@ -37,13 +41,26 @@ public class DetalhesNegocioFragment extends Fragment {
         nomeNegocio = view.findViewById(R.id.nome_negocio);
         descricaoBreveNegocio = view.findViewById(R.id.descBreveNegocio);
         descricaoNegocio = view.findViewById(R.id.descricao_negocio);
+        statusNegocio = view.findViewById(R.id.statusNegocio);
+
 
         nomeNegocio.setText(negocio.getNome());
         descricaoBreveNegocio.setText(negocio.getDescBreve());
         descricaoNegocio.setText(negocio.getDescricao());
-        descricaoNegocio.setEnabled(false);
 
-        //TODO completar com status do negocio
+        status = negocio.getStatus();
+        if (status){
+            statusNegocio.setText("Negócio Aberto");
+        }
+            else{
+            statusNegocio.setText("Negócio Fechado");
+        }
+
+
+
+
+        //TODO completar com layout do status do negocio
+
         return view;
     }
 
