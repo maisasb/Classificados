@@ -13,11 +13,16 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.luna.classificados.R;
+import com.luna.classificados.activity.LoginActivity;
 import com.luna.classificados.activity.MainActivity;
 import com.luna.classificados.fragment.CadastroNegocioFragment;
+import com.luna.classificados.helper.Preferencias;
+import com.luna.classificados.model.Condominio;
 import com.luna.classificados.model.Negocio;
+import com.luna.classificados.model.Usuario;
 import com.luna.classificados.utils.TagFragmentEnum;
 
 import java.util.List;
@@ -99,7 +104,28 @@ public class GerenciarNegocioAdapter extends BaseAdapter {
         });
 
         Button remover = view.findViewById(R.id.remover);
-        //TODO remover
+        remover.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Negocio negocio = getItem(position);
+                boolean sucesso = negocio.remover();
+
+                Usuario usuario = new Usuario();
+                usuario.setId(negocio.getUsuario());
+                boolean sucessoUsuario = usuario.removeNegocio(negocio.getId());
+
+
+                Condominio condominio = new Condominio();
+                condominio.setId(negocio.getCondominio());
+                boolean sucessoCondominio = condominio.removeNegocio(negocio.getId());
+
+                negocios.remove(negocio);
+
+                notifyDataSetChanged();
+            }
+
+        });
 
         return view;
     }

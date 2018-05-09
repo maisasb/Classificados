@@ -4,8 +4,13 @@ package com.luna.classificados.model;
  * Created by natalia.vaz on 06/03/2018.
  */
 
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
+import com.luna.classificados.R;
+import com.luna.classificados.activity.LoginActivity;
 import com.luna.classificados.helper.FirebaseBanco;
 
 import java.io.Serializable;
@@ -23,6 +28,7 @@ public class Negocio implements Serializable{
     private String contato;
     private boolean status;
     private boolean whatsapp;
+    public String condominio;
 
     public Negocio(){
 
@@ -101,6 +107,13 @@ public class Negocio implements Serializable{
         this.whatsapp = whatsapp;
     }
 
+    public String getCondominio() {
+        return condominio;
+    }
+
+    public void setCondominio(String condominio) {
+        this.condominio = condominio;
+    }
 
     public void salvar(){
 
@@ -112,6 +125,12 @@ public class Negocio implements Serializable{
     public void atualizar(){
         DatabaseReference reference = FirebaseBanco.getFirebaseBanco().child("negocios").child(getId());
         reference.updateChildren(toMap());
+    }
+
+    public boolean remover(){
+        DatabaseReference reference = FirebaseBanco.getFirebaseBanco().child("negocios").child(getId());
+        Task task =  reference.removeValue();
+        return task.isSuccessful();
     }
 
     @Exclude
@@ -126,6 +145,7 @@ public class Negocio implements Serializable{
         result.put("contato", contato);
         result.put("status", status);
         result.put("whatsapp", whatsapp);
+        result.put("condominio", condominio);
 
         return result;
     }

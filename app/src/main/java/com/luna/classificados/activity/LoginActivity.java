@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -144,17 +145,19 @@ public class LoginActivity extends AppCompatActivity {
                                 referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(autenticacao.getCurrentUser().getUid());
                                 referenciaBanco.addListenerForSingleValueEvent(valueEventListenerUsuario);
 
-                            }else{
+                            }else {
 
-                                try{
+                                try {
 
                                     throw task.getException();
 
-                                }catch (FirebaseAuthInvalidUserException e){
+                                } catch (FirebaseAuthInvalidUserException e) {
                                     Toast.makeText(LoginActivity.this, R.string.login_error_email, Toast.LENGTH_SHORT).show();
-                                }catch(FirebaseAuthInvalidCredentialsException e){
+                                } catch (FirebaseAuthInvalidCredentialsException e) {
                                     Toast.makeText(LoginActivity.this, R.string.login_error_pass, Toast.LENGTH_SHORT).show();
-                                }catch(Exception e){
+                                } catch(FirebaseNetworkException e){
+                                    Toast.makeText(LoginActivity.this, R.string.network_error_pass, Toast.LENGTH_SHORT).show();
+                                } catch(Exception e){
                                     Toast.makeText(LoginActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
                                 }
 

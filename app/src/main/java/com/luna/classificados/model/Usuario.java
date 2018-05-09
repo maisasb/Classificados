@@ -1,5 +1,6 @@
 package com.luna.classificados.model;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.luna.classificados.helper.FirebaseBanco;
@@ -73,6 +74,12 @@ public class Usuario {
         DatabaseReference referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(getId());
         referenciaBanco.child("negocios").child(idNegocio).setValue(true);
 
+    }
+
+    public boolean removeNegocio(String idNegocio){
+        DatabaseReference referenciaBanco = FirebaseBanco.getFirebaseBanco().child("usuarios").child(getId()).child("negocios").child(idNegocio);
+        Task task = referenciaBanco.removeValue();
+        return task.isSuccessful();
     }
 
 }

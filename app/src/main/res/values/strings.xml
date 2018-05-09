@@ -11,6 +11,7 @@
     <string name="login_error_pass">Senha inválida.</string>
     <string name="login_error_email">Email inválido.</string>
     <string name="login_complete_fields">Preencha todos os campos.</string>
+    <string name="network_error_pass">Verifique a conexão com a internet.</string>
 
     <!-- Tela cadastro -->
     <string name="add_confirmPass">Confirmar senha*</string>

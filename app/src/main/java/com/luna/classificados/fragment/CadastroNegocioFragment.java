@@ -189,7 +189,10 @@ public class CadastroNegocioFragment extends Fragment {
 
                             Preferencias preferencias = new Preferencias(getActivity());
                             String idUsuario = preferencias.getIdentificador();
+                            String idCondominio = preferencias.getCondominio();
+
                             negocio.setUsuario(idUsuario);
+                            negocio.setCondominio(idCondominio);
 
                             negocio.salvar();
 
@@ -198,7 +201,7 @@ public class CadastroNegocioFragment extends Fragment {
                             usuario.setId(idUsuario);
                             usuario.salvaNegocio(idNegocio);
 
-                            String idCondominio = preferencias.getCondominio();
+
                             Condominio condominio = new Condominio();
                             condominio.setId(idCondominio);
                             condominio.salvaNegocio(idNegocio);
