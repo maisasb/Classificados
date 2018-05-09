@@ -1,16 +1,24 @@
 package com.luna.classificados.adapter;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.luna.classificados.R;
+import com.luna.classificados.activity.MainActivity;
+import com.luna.classificados.fragment.CadastroNegocioFragment;
 import com.luna.classificados.model.Negocio;
+import com.luna.classificados.utils.TagFragmentEnum;
 
 import java.util.List;
 
@@ -21,11 +29,11 @@ import java.util.List;
 public class GerenciarNegocioAdapter extends BaseAdapter {
 
     private List<Negocio> negocios;
-    private Activity activity;
+    private MainActivity activity;
 
     public GerenciarNegocioAdapter(List<Negocio> negocios, Activity activity) {
         this.negocios = negocios;
-        this.activity = activity;
+        this.activity = (MainActivity) activity;
     }
 
     @Override
@@ -44,7 +52,7 @@ public class GerenciarNegocioAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View view = activity.getLayoutInflater().inflate(R.layout.item_gerenciar_negocio_adapter, parent, false);
 
@@ -67,6 +75,31 @@ public class GerenciarNegocioAdapter extends BaseAdapter {
 
             }
         });
+
+
+        Button editar = view.findViewById(R.id.editar);
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Negocio negocio = getItem(position);
+
+                Fragment fragmentNegocio = new CadastroNegocioFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("negocio",negocio);
+                bundle.putString("status", "EDITAR");
+                fragmentNegocio.setArguments(bundle);
+                FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.conteudo, fragmentNegocio, TagFragmentEnum.CAD_NEGOCIO.toString());
+
+                activity.getSupportFragmentManager().popBackStack();
+                fragmentTransaction.commit();
+            }
+        });
+
+        Button remover = view.findViewById(R.id.remover);
+        //TODO remover
 
         return view;
     }

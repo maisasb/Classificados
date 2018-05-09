@@ -124,6 +124,7 @@ public class GerenciarNegociosFragment extends Fragment {
                 Fragment fragmentNegocio = new CadastroNegocioFragment();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("negocio",negocio);
+                bundle.putString("status", "VISUALIZAR");
                 fragmentNegocio.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
 

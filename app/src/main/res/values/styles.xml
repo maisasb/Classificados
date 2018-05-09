@@ -49,4 +49,13 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
     </style>
 
+    <style name="CamposCadastro">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="Checkbox">
+        <item name="buttonTint">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/textDark</item>
+    </style>
 </resources>

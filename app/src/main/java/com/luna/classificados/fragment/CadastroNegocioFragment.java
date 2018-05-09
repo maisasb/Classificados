@@ -52,9 +52,9 @@ public class CadastroNegocioFragment extends Fragment {
     public ArrayAdapter dataAdapter;
     public DatabaseReference referenciaBanco;
     public ValueEventListener valueEventListenerCategoria;
-    public boolean CADASTRO = true;
     public Negocio negocio = null;
-
+    public String status = TIPO_STATUS.CADASTRO.toString();
+    public enum TIPO_STATUS {CADASTRO, EDITAR, VISUALIZAR};
 
     @Override
     public void onStop() {
@@ -91,14 +91,15 @@ public class CadastroNegocioFragment extends Fragment {
         whatsapp = view.findViewById(R.id.checkWhatsapp);
 
         Bundle bundle = getArguments();
-
+        String statusBundle = "";
         if (bundle != null){
             negocio = (Negocio) bundle.getSerializable("negocio");
+            statusBundle = bundle.getString("status");
         }
 
 
         if (negocio != null){
-            CADASTRO = false;
+
             nomeNegocio.setText(negocio.getNome());
             descBreveNegocio.setText(negocio.getDescBreve());
             descNegocio.setText(negocio.getDescricao());
@@ -107,9 +108,26 @@ public class CadastroNegocioFragment extends Fragment {
             whatsapp.setChecked(negocio.isWhatsapp());
             botaoCadastrar.setText("EDITAR");
 
+            if (statusBundle.equals(TIPO_STATUS.EDITAR.toString())){
+                status = TIPO_STATUS.EDITAR.toString();
+                botaoCadastrar.setVisibility(View.VISIBLE);
+            }else{
+                status = TIPO_STATUS.VISUALIZAR.toString();
+                botaoCadastrar.setVisibility(View.INVISIBLE);
+                nomeNegocio.setEnabled(false);
+                descBreveNegocio.setEnabled(false);
+                descNegocio.setEnabled(false);
+                contatoNegocio.setEnabled(false);
+                cadSwitch.setEnabled(false);
+                whatsapp.setEnabled(false);
+
+            }
+
+
         }else{
             botaoCadastrar.setText("CADASTRAR");
-            CADASTRO = true;
+            status = TIPO_STATUS.CADASTRO.toString();
+            botaoCadastrar.setVisibility(View.VISIBLE);
             negocio = new Negocio();
         }
 
@@ -127,7 +145,7 @@ public class CadastroNegocioFragment extends Fragment {
                         categoria.setId(categoriasId.getKey());
                         categoriaLista.add(categoria);
 
-                        if (!CADASTRO){
+                        if (!status.equals(TIPO_STATUS.CADASTRO.toString())){
                             if (negocio.getCategoria().equals(categoria.getId())){
                                 categoriaSelecionada = categoria;
                             }
@@ -138,7 +156,7 @@ public class CadastroNegocioFragment extends Fragment {
                 }
                 dataAdapter.notifyDataSetChanged();
 
-                if (!CADASTRO) {
+                if (!status.equals(TIPO_STATUS.CADASTRO.toString())){
                     categoriaNegocio.setSelection(dataAdapter.getPosition(categoriaSelecionada));
                 }
             }
@@ -164,7 +182,7 @@ public class CadastroNegocioFragment extends Fragment {
                         negocio.setStatus(cadSwitch.isChecked());
                         negocio.setWhatsapp(whatsapp.isChecked());
 
-                        if(CADASTRO){
+                    if (status.equals(TIPO_STATUS.CADASTRO.toString())){
                             Calendar timeStamp = Calendar.getInstance();
                             String idNegocio = String.valueOf(timeStamp.getTimeInMillis());
                             negocio.setId(idNegocio);
